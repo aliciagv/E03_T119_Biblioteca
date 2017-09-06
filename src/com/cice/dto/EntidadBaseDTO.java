@@ -41,7 +41,7 @@ public class EntidadBaseDTO {
     }
     
     public void mostrarInfo(){
-        System.out.println("La fecha de publicación es:" + sdf.format(fechaPublicacion));
+        System.out.println("La fecha de publicación es: " + sdf.format(fechaPublicacion));
         System.out.println("El nombre es: "+ nombre);
     }
     

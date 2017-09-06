@@ -170,7 +170,7 @@ private static Date getRandomJoinDate()
         String sdate="";
         int yearBegin=1990;
         int yearEnd=2016-yearBegin;
-        sdate=""+(1 + (int)(Math.random() * 31)+"/"+(1 + (int)(Math.random() * 12)+"/"+(yearBegin + (int)(Math.random() * yearEnd))));
+        sdate=""+(1 + (int)(Math.random() * 31)+"-"+(1 + (int)(Math.random() * 12)+"-"+(yearBegin + (int)(Math.random() * yearEnd))));
         Date date=null;
         try {
             date = sdf.parse(sdate);

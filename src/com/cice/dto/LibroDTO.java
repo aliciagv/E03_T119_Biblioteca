@@ -12,25 +12,22 @@ import java.util.Date;
  *
  * @author cice
  */
-public class LibroDTO extends EntidadBaseDTO implements IPrestable{
-    
+public class LibroDTO extends EntidadBaseDTO implements IPrestable {
+
     private String edicion;
-    
+
     private String ISBN;
-    
-    private String autor; 
-    
+
+    private String autor;
+
     private boolean prestado;
-    
-    
-    
+
     public LibroDTO(String edicion, String ISBN, String autor, Date fechaPublicacion, String nombre) {
         super(fechaPublicacion, nombre);
         this.edicion = edicion;
         this.ISBN = ISBN;
         this.autor = autor;
     }
-    
 
     public String getEdicion() {
         return edicion;
@@ -56,16 +53,33 @@ public class LibroDTO extends EntidadBaseDTO implements IPrestable{
         this.autor = autor;
     }
 
-    @Override
+    public void setPrestado(boolean prestado) {
+        this.prestado = prestado;
+    }
+    
+
     public boolean isPrestado() {
         return prestado;
     }
 
-    @Override
     public void cambiarEstado() {
-        prestado=!prestado;
+        prestado = !prestado;
     }
     
     
+    public String toString(){
+        return "Prestado: " + isPrestado();
+                 
     
+    }
+     public void mostrarInfo(){
+        System.out.println("===============");
+        System.out.println("LIBRO");
+        System.out.println("===============");
+        System.out.println("La Edición es: " + edicion );
+        System.out.println("El ISBN es: "+ ISBN );
+        System.out.println("El autor es: "+ autor );
+        super.mostrarInfo();
+    }
+
 }

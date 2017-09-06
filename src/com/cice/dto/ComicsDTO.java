@@ -37,6 +37,16 @@ public class ComicsDTO extends EntidadBaseDTO{
     public void setNumero(String numero) {
         this.numero = numero;
     }
+    
+    public void mostrarInfo() {
+
+        System.out.println("===============");
+        System.out.println("COMICS");
+        System.out.println("===============");
+        System.out.println("El número es: " + numero);
+        System.out.println("La colección es: " + coleccion);
+        super.mostrarInfo();
+    }
 
     
     

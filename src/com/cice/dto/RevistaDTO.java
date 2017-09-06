@@ -13,10 +13,10 @@ import java.util.Date;
  * @author cice
  */
 public class RevistaDTO extends EntidadBaseDTO {
-    
+
     private String numero;
-    
-    private  Periodicidad periodicidad;
+
+    private Periodicidad periodicidad;
 
     public RevistaDTO(String numero, Periodicidad periodicidad, Date fechaPublicacion, String nombre) {
         super(fechaPublicacion, nombre);
@@ -40,7 +40,15 @@ public class RevistaDTO extends EntidadBaseDTO {
         this.periodicidad = periodicidad;
     }
 
-    
-    
-    
+    @Override
+    public void mostrarInfo() {
+
+        System.out.println("===============");
+        System.out.println("REVISTA");
+        System.out.println("===============");
+        System.out.println("El número es: " + numero);
+        System.out.println("La peridicidad es: " + periodicidad.getPeriodo());
+        super.mostrarInfo();
+    }
+
 }

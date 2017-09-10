@@ -29,8 +29,9 @@ public class Main {
      * @param args the command line arguments
      */
     private static ArrayList<EntidadBaseDTO> listaEntidades;
-    
+
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -43,8 +44,6 @@ public class Main {
 
     private static void incluirDatos() {
         listaEntidades = new ArrayList();
-
-      
         String dateInString = "31-08-1982";
         Date date = null;
         try {
@@ -52,7 +51,7 @@ public class Main {
         } catch (ParseException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-       /* LibroDTO libro1 = new LibroDTO("Edicion1", "ISBN123", "Autor", date, "Nombre1");
+        /* LibroDTO libro1 = new LibroDTO("Edicion1", "ISBN123", "Autor", date, "Nombre1");
         libro1.setPrestado(true);
         listaEntidades.add(libro1);*/
         listaEntidades.add(new LibroDTO("Edicion1", "ISBN123", "Autor", getRandomJoinDate(), "Nombre1"));
@@ -70,7 +69,6 @@ public class Main {
 
     private static void menu() {
         int opcion = 0;
-        Scanner sc = new Scanner(System.in);
 
         do {
             System.out.println("==================");
@@ -135,7 +133,26 @@ public class Main {
 
     }
 
+    /**
+     * Imprimir Publicaciones anteriores a una fecha
+     */
     private static void buscarPublicacionPorFecha() {
+
+        System.out.println("Introduce una fecha en formato dd-MM-yyyy ");
+        Date date = null;
+        try {
+            date = sdf.parse(sc.next());
+             for (EntidadBaseDTO ebdto : listaEntidades) {
+            if (ebdto.getFechaPublicacion().before(date)) {
+                ebdto.mostrarInfo();
+            }
+
+        }
+        } catch (ParseException ex) {
+            System.out.println("No ha introducido la fecha en estado correcto");
+
+        }
+       
 
     }
 
@@ -163,21 +180,58 @@ public class Main {
         }
 
     }
-    
-    
-private static Date getRandomJoinDate()
-    {
-        String sdate="";
-        int yearBegin=1990;
-        int yearEnd=2016-yearBegin;
-        sdate=""+(1 + (int)(Math.random() * 31)+"-"+(1 + (int)(Math.random() * 12)+"-"+(yearBegin + (int)(Math.random() * yearEnd))));
-        Date date=null;
+
+    private static Date getRandomJoinDate() {
+        String sdate = "";
+        int yearBegin = 1990;
+        int yearEnd = 2016 - yearBegin;
+        int mes = (1 + (int) (Math.random() * 12));
+        int year = yearBegin + (int) (Math.random() * yearEnd);
+        int diahasta;
+        switch (mes) {
+
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                diahasta = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                diahasta = 30;
+                break;
+            case 2:
+                if (isBisiesto(year)) {
+                    diahasta = 29;
+                } else {
+                    diahasta = 28;
+                }
+                break;
+            default:
+                throw new AssertionError();
+        }
+        sdate = (1 + (int) (Math.random() * diahasta)) + "-" + mes + "-" + year;
+
+        Date date = null;
         try {
             date = sdf.parse(sdate);
         } catch (ParseException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         return date;
+    }
+
+    private static boolean isBisiesto(int year) {
+        boolean bisiesto = false;
+        if ((year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0))) {
+            bisiesto = true;
+        }
+        return bisiesto;
     }
 
 }
